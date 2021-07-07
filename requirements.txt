@@ -51,4 +51,4 @@ youtube_dl
 html2text
 bing_image_downloader
 register
-random2
+random
