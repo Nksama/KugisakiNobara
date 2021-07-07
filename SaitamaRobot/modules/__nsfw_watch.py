@@ -1,4 +1,4 @@
-from SaitamRobot import telethn as bot
+from SaitamaRobot import telethn as bot
 from SaitamaRobot import telethn as tbot
 from SaitamaRobot.events import register
 from telethon import *
