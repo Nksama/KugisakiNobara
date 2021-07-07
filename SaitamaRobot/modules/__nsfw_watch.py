@@ -7,7 +7,7 @@ from SaitamaRobot.helper_extra.badmedia import is_nsfw
 import requests
 import string 
 import random 
-from SaitamaRobot.modules.sql_extended.nsfw_watch_sql import add_nsfwatch, rmnsfwatch, get_all_nsfw_enabled_chat, is_nsfwatch_indb
+from SaitamaRobot.modules.sql.nsfw_watch_sql import add_nsfwatch, rmnsfwatch, get_all_nsfw_enabled_chat, is_nsfwatch_indb
 from telethon.tl.types import (
     ChannelParticipantsAdmins,
     ChatAdminRights,
