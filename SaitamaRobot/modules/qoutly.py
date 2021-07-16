@@ -1,3 +1,4 @@
+  
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from telethon.tl import types, functions
 from fontTools.ttLib import TTFont 
@@ -10,8 +11,7 @@ import random
 import json
 import os
 import re
-
-from SaitamaRobot.event import register
+from Cutiepii_Robot.event import register
 
 COLORS = [
     "#F07975", "#F49F69", "#F9C84A", "#8CC56E", "#6CC7DC", "#80C1FA", "#BCB3F9", "#E181AC"]
@@ -64,8 +64,7 @@ async def process(msg, user, client, reply, replied=None):
                         width = mono.getsize(line)[0] + 30
                     else:
                         width = fallback.getsize(line)[0]
-                if maxlength < length:
-                    maxlength = length
+                maxlength = max(maxlength, length)
 
         title = ""
         try:
@@ -268,7 +267,7 @@ async def drawer(width, height):
 
         # Middle part
         middle = Image.new("RGBA", (top.width, height + 75), (29, 29, 29, 255))
-        
+
         # Bottom part
         bottom = ImageOps.flip(top)
 
@@ -337,11 +336,11 @@ async def emoji_fetch(emoji):
         else:
             img = emojis["⛔"]
             return await transparent(urllib.request.urlretrieve(img, "resources/emoji.png")[0])
-        
+
 async def transparent(emoji):
         emoji = Image.open(emoji).convert("RGBA")
         emoji.thumbnail((40, 40))
-        
+
         # Mask
         mask = Image.new("L", (40, 40), 0)
         draw = ImageDraw.Draw(mask)
@@ -372,7 +371,7 @@ async def replied_user(draw, tot, text, maxlength, title):
             else:
                 draw.text((180 + space, 132), letter, font=textfont, fill="white")
                 space += textfont.getsize(letter)[0]
-                
+
 @register(pattern="^/q")
 async def _(event):
     if event.fwd_from:
@@ -389,3 +388,11 @@ async def _(event):
     canvas.save('sticker.webp')
     await event.client.send_file(event.chat_id, "sticker.webp", reply_to=event.reply_to_msg_id)
     os.remove('sticker.webp')
+    
+__help__ = """
+   /q :- Please reply to a text message,
+Do you know that you can convert a text message to a sticker? by replying /q to a text message
+"""
+__mod_name__ = "Quotly"
+
+
