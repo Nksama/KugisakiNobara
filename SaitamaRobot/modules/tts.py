@@ -1,55 +1,73 @@
-import html
-import re
-from datetime import datetime
-from typing import List
-import random
-from telegram import ChatAction
+from typing import Optional, List
 from gtts import gTTS
-import time
-from telegram import ChatAction
-from feedparser import parse
-import json
-import urllib.request
-import urllib.parse
+import os
 import requests
+import json
 
-from SaitamaRobot import (DEV_USERS, OWNER_ID, DRAGONS, DEMONS,
-                          TIGERS, WOLVES, dispatcher, updater)
-from SaitamaRobot.__main__ import STATS, TOKEN, USER_INFO
+from telegram import ChatAction
+from telegram.ext import run_async
+
+from SaitamaRobot import dispatcher
 from SaitamaRobot.modules.disable import DisableAbleCommandHandler
-from SaitamaRobot.modules.helper_funcs.filters import CustomFilters
-from SaitamaRobot.modules.helper_funcs.chat_status import sudo_plus, user_admin
-from telegram import MessageEntity, ParseMode, Update, constants
-from telegram.error import BadRequest
-from emoji import UNICODE_EMOJI
-from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
-from telegram.utils.helpers import mention_html
+from SaitamaRobot.modules.helper_funcs.alternate import typing_action, send_action
 
 @run_async
-def tts(update: Update, context: CallbackContext):
-    args = context.args
-    current_time = datetime.strftime(datetime.now(), "%d.%m.%Y %H:%M:%S")
-    filename = datetime.now().strftime("%d%m%y-%H%M%S%f")
-    reply = " ".join(args)
-    update.message.chat.send_action(ChatAction.RECORD_AUDIO)
-    lang="ml"
-    tts = gTTS(reply, lang)
-    tts.save("k.mp3")
-    with open("k.mp3", "rb") as f:
-        linelist = list(f)
-        linecount = len(linelist)
-    if linecount == 1:
-        update.message.chat.send_action(ChatAction.RECORD_AUDIO)
-        lang = "en"
-        tts = gTTS(reply, lang)
+@send_action(ChatAction.RECORD_AUDIO)
+def gtts(update, context):
+    msg = update.effective_message
+    reply = " ".join(context.args)
+    if not reply:
+        if msg.reply_to_message:
+            reply = msg.reply_to_message.text
+        else:
+            return msg.reply_text(
+                "Reply to some message or enter some text to convert it into audio format!"
+            )
+        for x in "\n":
+            reply = reply.replace(x, "")
+    try:
+        tts = gTTS(reply)
         tts.save("k.mp3")
-    with open("k.mp3", "rb") as speech:
-        update.message.reply_voice(speech, quote=False)
+        with open("k.mp3", "rb") as speech:
+            msg.reply_audio(speech)
+    finally:
+        if os.path.isfile("k.mp3"):
+            os.remove("k.mp3")
 
-__help__ = "" # no help string
-TTS_HANDLER = DisableAbleCommandHandler("tts", tts, pass_args=True)
-dispatcher.add_handler(TTS_HANDLER)
 
-__mod_name__ = "TTS - STT"
-__command_list__ = ["tts"]
-__handlers__ = [TTS_HANDLER]
+# Open API key
+API_KEY = "6ae0c3a0-afdc-4532-a810-82ded0054236"
+URL = "http://services.gingersoftware.com/Ginger/correct/json/GingerTheText"
+
+
+@run_async
+@typing_action
+def spellcheck(update, context):
+    if update.effective_message.reply_to_message:
+        msg = update.effective_message.reply_to_message
+
+        params = dict(lang="US", clientVersion="2.0", apiKey=API_KEY, text=msg.text)
+
+        res = requests.get(URL, params=params)
+        changes = json.loads(res.text).get("LightGingerTheTextResult")
+        curr_string = ""
+        prev_end = 0
+
+        for change in changes:
+            start = change.get("From")
+            end = change.get("To") + 1
+            suggestions = change.get("Suggestions")
+            if suggestions:
+                sugg_str = suggestions[0].get("Text")  # should look at this list more
+                curr_string += msg.text[prev_end:start] + sugg_str
+                prev_end = end
+
+        curr_string += msg.text[prev_end:]
+        update.effective_message.reply_text(curr_string)
+    else:
+        update.effective_message.reply_text(
+            "Reply to some message to get grammar corrected text!"
+        )
+
+dispatcher.add_handler(DisableAbleCommandHandler("tts", gtts, pass_args=True))
+dispatcher.add_handler(DisableAbleCommandHandler("splcheck", spellcheck))
