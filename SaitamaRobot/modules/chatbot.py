@@ -9,7 +9,7 @@ from pyrogram import filters
 from SaitamaRobot import BOT_ID
 from SaitamaRobot.modules.mongo.chatbot_mongo import add_chat, get_session, remove_chat
 from SaitamaRobot.functions.pluginhelpers import admins_only, edit_or_reply
-from SaitamaRobot import pgram as cutiepii
+from SaitamaRobot import pgram as SaitamaRobot
 
 translator = google_translator()
 
