@@ -1,3 +1,4 @@
+  
 from telegram.error import BadRequest
 from functools import wraps
 from telegram import ChatAction
@@ -21,3 +22,18 @@ def typing_action(func):
         return func(update, context, *args, **kwargs)
 
     return command_func
+
+def send_action(action):
+    """Sends `action` while processing func command."""
+
+    def decorator(func):
+        @wraps(func)
+        def command_func(update, context, *args, **kwargs):
+            context.bot.send_chat_action(
+                chat_id=update.effective_chat.id, action=action
+            )
+            return func(update, context, *args, **kwargs)
+
+        return command_func
+
+    return decorator
