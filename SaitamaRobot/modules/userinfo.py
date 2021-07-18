@@ -271,7 +271,7 @@ def info(update: Update, context: CallbackContext):
     disaster_level_present = False
 
     if user.id == OWNER_ID:
-        text += "\n\nThe Disaster level of this person is 'GOD'."
+        text += "\n\nThe Disaster level of this person is 'God'."
         disaster_level_present = True
     elif user.id in DEV_USERS:
         text += "\n\nThis user is member of 'Hero Association'."
@@ -290,7 +290,7 @@ def info(update: Update, context: CallbackContext):
         disaster_level_present = True
 
     if disaster_level_present:
-        text += ' [<a href="https://t.me/nobara_kugisaki_updates/8">?</a>]'.format(
+        text += ' [<a href="https://t.me/OnePunchUpdates/155">?</a>]'.format(
             bot.username)
 
     try:
@@ -314,7 +314,7 @@ def info(update: Update, context: CallbackContext):
         if mod_info:
             text += "\n\n" + mod_info
 
-  if INFOPIC:
+    if INFOPIC:
         try:
             profile = context.bot.get_user_profile_photos(user.id).photos[0][-1]
             _file = bot.get_file(profile["file_id"])
@@ -497,21 +497,18 @@ __help__ = """
 *ID:*
  • `/id`*:* get the current group id. If used by replying to a message, gets that user's id.
  • `/gifid`*:* reply to a gif to me to tell you its file ID.
-
 *Self addded information:* 
  • `/setme <text>`*:* will set your info
  • `/me`*:* will get your or another user's info.
 Examples:
  `/setme I am a wolf.`
  `/me @username(defaults to yours if no user specified)`
-
 *Information others add on you:* 
  • `/bio`*:* will get your or another user's bio. This cannot be set by yourself.
 • `/setbio <text>`*:* while replying, will save another user's bio 
 Examples:
  `/bio @username(defaults to yours if not specified).`
  `/setbio This user is a wolf` (reply to the user)
-
 *Overall Information about you:*
  • `/info`*:* get information about a user. 
  
