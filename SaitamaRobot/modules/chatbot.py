@@ -12,7 +12,7 @@ from google_trans_new import google_translator
 from pyrogram import filters
 
 from SaitamaRobot import BOT_ID
-from SaitamaRobot.Chatbot.chatbotdb import add_chat, get_session, remove_chat
+from SaitamaRobot.chatbot.chatbotdb import add_chat, get_session, remove_chat
 from SaitamaRobot import arq
 from SaitamaRobot.utils.pluginhelp import admins_only, edit_or_reply
 from SaitamaRobot import pbot as Nobara
