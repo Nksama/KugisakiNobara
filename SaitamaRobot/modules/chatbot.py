@@ -1,21 +1,29 @@
 import re
-import aiohttp
+
 import emoji
-import requests
-
-from google_trans_new import google_translator
-from pyrogram import filters
-
-from SaitamaRobot import BOT_ID
-from SaitamaRobot.modules.mongo.chatbot_mongo import add_chat, get_session, remove_chat
-from SaitamaRobot.functions.pluginhelpers import admins_only, edit_or_reply
-from SaitamaRobot import pgram as SaitamaRobot
-
-translator = google_translator()
 
 IBM_WATSON_CRED_URL = "https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/bd6b59ba-3134-4dd4-aff2-49a79641ea15"
 IBM_WATSON_CRED_PASSWORD = "UQ1MtTzZhEsMGK094klnfa-7y_4MCpJY1yhd52MXOo3Y"
 url = "https://acobot-brainshop-ai-v1.p.rapidapi.com/get"
+import re
+
+import aiohttp
+from google_trans_new import google_translator
+from pyrogram import filters
+
+from SaitamaRobot import BOT_ID
+from SaitamaRobot.Chatbot.chatbotdb import add_chat, get_session, remove_chat
+from SaitamaRobot import arq
+from SaitamaRobot.utils.pluginhelp import admins_only, edit_or_reply
+from SaitamaRobot import pbot as eren
+
+translator = google_translator()
+
+
+async def lunaQuery(query: str, user_id: int):
+    luna = await arq.luna(query, user_id)
+    return luna.result
+
 
 def extract_emojis(s):
     return "".join(c for c in s if c in emoji.UNICODE_EMOJI)
@@ -35,16 +43,48 @@ async def fetch(url):
         print("AI response Timeout")
         return
 
-
-cutiepii_chats = []
+eren_chats = []
 en_chats = []
+# AI Chat (C) 2020-2021 by @InukaAsith
+"""
+@eren.on_message(
+    filters.voice & filters.reply & ~filters.bot & ~filters.via_bot & ~filters.forwarded,
+    group=2,
+)
+async def hmm(client, message):
+    if not get_session(int(message.chat.id)):
+        message.continue_propagation()
+    if message.reply_to_message.from_user.id != BOT_ID:
+        message.continue_propagation()
+    previous_message = message
+    required_file_name = message.download()
+    if IBM_WATSON_CRED_URL is None or IBM_WATSON_CRED_PASSWORD is None:
+        await message.reply(
+            "You need to set the required ENV variables for this module. \nModule stopping"
+        )
+    else:
+        headers = {
+            "Content-Type": previous_message.voice.mime_type,
+        }
+        data = open(required_file_name, "rb").read()
+        response = requests.post(
+            IBM_WATSON_CRED_URL + "/v1/recognize",
+            headers=headers,
+            data=data,
+            auth=("apikey", IBM_WATSON_CRED_PASSWORD),
+        )
+        r = response.json()
+        print(r)
+        await client.send_message(message, r)
+"""
 
-@cutiepii.on_message(
+
+@eren.on_message(
     filters.command("chatbot") & ~filters.edited & ~filters.bot & ~filters.private
 )
 @admins_only
-async def hmm(_, message):
-    global cutiepii_chats
+async def chatbot_status(_, message):
+    global eren_chats
     if len(message.command) != 2:
         await message.reply_text(
             "I only recognize `/chatbot on` and /chatbot `off only`"
@@ -56,36 +96,36 @@ async def hmm(_, message):
         lel = await edit_or_reply(message, "`Processing...`")
         lol = add_chat(int(message.chat.id))
         if not lol:
-            await lel.edit("cutiepii AI Already Activated In This Chat")
+            await lel.edit("Chat Bot Already Activated In This Chat")
             return
         await lel.edit(
-            f"cutiepii AI Successfully Added For Users In The Chat {message.chat.id}"
+            f"Chat Bot Successfully Added For Users In The Chat {message.chat.id}"
         )
 
     elif status == "OFF" or status == "off" or status == "Off":
         lel = await edit_or_reply(message, "`Processing...`")
         Escobar = remove_chat(int(message.chat.id))
         if not Escobar:
-            await lel.edit("Nobara AI Was Not Activated In This Chat")
+            await lel.edit("Chat Bot Was Not Activated In This Chat")
             return
         await lel.edit(
-            f"Nobara AI Successfully Deactivated For Users In The Chat {message.chat.id}"
+            f"Chat Bot Successfully Deactivated For Users In The Chat {message.chat.id}"
         )
 
     elif status == "EN" or status == "en" or status == "english":
         if not chat_id in en_chats:
             en_chats.append(chat_id)
-            await message.reply_text("English AI chat Enabled!")
+            await message.reply_text("English Only chat bot Enabled!")
             return
-        await message.reply_text("AI Chat Is Already Disabled.")
+        await message.reply_text("Chat Bot Is Already Disabled.")
         message.continue_propagation()
     else:
         await message.reply_text(
-            "I only recognize `/chatbot on` and /chatbot `off only`"
+            "I only recognize `/chatbot on` and `/chatbot off` only"
         )
 
 
-@cutiepii.on_message(
+@eren.on_message(
     filters.text
     & filters.reply
     & ~filters.bot
@@ -94,7 +134,7 @@ async def hmm(_, message):
     & ~filters.forwarded,
     group=2,
 )
-async def hmm(client, message):
+async def chatbot_function(client, message):
     if not get_session(int(message.chat.id)):
         return
     if not message.reply_to_message:
@@ -111,23 +151,17 @@ async def hmm(client, message):
         message.continue_propagation()
     if chat_id in en_chats:
         test = msg
-        test = test.replace("cutiepii", "Aco")
-        test = test.replace("cutiepii", "Aco")
-        URL = "https://api.affiliateplus.xyz/api/chatbot?message=hi&botname=@Cutiepii_Robot&ownername=@Awesome_RJ"
+        test = test.replace("eren", "Aco")
+        test = test.replace("Eren", "Aco")
+        response = await lunaQuery(
+            test, message.from_user.id if message.from_user else 0
+        )
+        response = response.replace("Aco", "Eren")
+        response = response.replace("aco", "Eren")
 
+        pro = response
         try:
-            r = requests.request("GET", url=URL)
-        except:
-            return
-
-        try:
-            result = r.json()
-        except:
-            return
-
-        pro = result["message"]
-        try:
-            await cutiepii.send_chat_action(message.chat.id, "typing")
+            await eren.send_chat_action(message.chat.id, "typing")
             await message.reply_text(pro)
         except CFError:
             return
@@ -173,36 +207,30 @@ async def hmm(client, message):
                 return
         # test = emoji.demojize(test.strip())
 
-        # Kang with the credits bitches @InukaASiTH
-        test = test.replace("cutiepii", "Aco")
-        test = test.replace("cutiepii", "Aco")
-        URL = f"https://api.affiliateplus.xyz/api/chatbot?message={test}&botname=@Cutiepii_Robot&ownername=@Awesome_RJ"
-        try:
-            r = requests.request("GET", url=URL)
-        except:
-            return
-
-        try:
-            result = r.json()
-        except:
-            return
-        pro = result["message"]
+        test = test.replace("Eren", "Aco")
+        test = test.replace("eren", "Aco")
+        response = await lunaQuery(
+            test, message.from_user.id if message.from_user else 0
+        )
+        response = response.replace("Aco", "eren")
+        response = response.replace("aco", "Eren")
+        pro = response
         if not "en" in lan and not lan == "":
             try:
                 pro = translator.translate(pro, lang_tgt=lan[0])
             except:
                 return
         try:
-            await cutiepii.send_chat_action(message.chat.id, "typing")
+            await eren.send_chat_action(message.chat.id, "typing")
             await message.reply_text(pro)
         except CFError:
             return
 
 
-@cutiepii.on_message(
+@eren.on_message(
     filters.text & filters.private & ~filters.edited & filters.reply & ~filters.bot
 )
-async def inuka(client, message):
+async def sasuke(client, message):
     msg = message.text
     if msg.startswith("/") or msg.startswith("@"):
         message.continue_propagation()
@@ -248,31 +276,25 @@ async def inuka(client, message):
     # test = emoji.demojize(test.strip())
 
     # Kang with the credits bitches @InukaASiTH
-    test = test.replace("cutiepii", "Aco")
-    test = test.replace("cutiepii", "Aco")
-    URL = f"https://api.affiliateplus.xyz/api/chatbot?message={test}&botname=@Cutiepii_Robot&ownername=@Awesome_RJ"
-    try:
-        r = requests.request("GET", url=URL)
-    except:
-        return
+    test = test.replace("Eren", "Aco")
+    test = test.replace("eren", "Aco")
 
-    try:
-        result = r.json()
-    except:
-        return
+    response = await lunaQuery(test, message.from_user.id if message.from_user else 0)
+    response = response.replace("Aco", "Eren")
+    response = response.replace("aco", "eren")
 
-    pro = result["message"]
+    pro = response
     if not "en" in lan and not lan == "":
         pro = translator.translate(pro, lang_tgt=lan[0])
     try:
-        await cutiepii.send_chat_action(message.chat.id, "typing")
+        await eren.send_chat_action(message.chat.id, "typing")
         await message.reply_text(pro)
     except CFError:
         return
 
 
-@cutiepii.on_message(
-    filters.regex("cutiepii|cutiepii|cutiepii|cutiepii|cutiepii")
+@eren.on_message(
+    filters.regex("Eren|eren|Eren Jaeger|eren jaeger|eren yeager|Eren Yeager")
     & ~filters.bot
     & ~filters.via_bot
     & ~filters.forwarded
@@ -280,7 +302,7 @@ async def inuka(client, message):
     & ~filters.channel
     & ~filters.edited
 )
-async def inuka(client, message):
+async def sasuke(client, message):
     msg = message.text
     if msg.startswith("/") or msg.startswith("@"):
         message.continue_propagation()
@@ -325,38 +347,35 @@ async def inuka(client, message):
 
     # test = emoji.demojize(test.strip())
 
-    # Kang with the credits bitches @InukaASiTH
-    test = test.replace("cutiepii", "Aco")
-    test = test.replace("cutiepii", "Aco")
-    URL = f"https://api.affiliateplus.xyz/api/chatbot?message={test}&botname=@Cutiepii_Robot&ownername=@Awesome_RJ"
-    try:
-        r = requests.request("GET", url=URL)
-    except:
-        return
+    test = test.replace("eren", "Aco")
+    test = test.replace("Eren", "Aco")
+    response = await lunaQuery(test, message.from_user.id if message.from_user else 0)
+    response = response.replace("Aco", "Eren")
+    response = response.replace("aco", "eren")
 
-    try:
-        result = r.json()
-    except:
-        return
-    pro = result["message"]
+    pro = response
     if not "en" in lan and not lan == "":
         try:
             pro = translator.translate(pro, lang_tgt=lan[0])
         except Exception:
             return
     try:
-        await cutiepii.send_chat_action(message.chat.id, "typing")
+        await eren.send_chat_action(message.chat.id, "typing")
         await message.reply_text(pro)
     except CFError:
         return
 
 
 __help__ = """
- Chatbot utilizes the Brainshop's API and allows Cutiepii to talk and provides a more interactive group chat experience.
+ Chatbot utilizes the Branshop's API and allows Eren to talk and provides a more interactive group chat experience.
  *Admins Only Commands*:
  • `/chatbot [ON/OFF]`: Enables and disables Chatbot mode in the chat.
  • `/chatbot EN` : Enables English only Chatbot mode in the chat.
  *Powered by Brainshop* (brainshop.ai)
+ 
+ 
+ 
+ 
 """
 
 __mod_name__ = "ChatBot"
