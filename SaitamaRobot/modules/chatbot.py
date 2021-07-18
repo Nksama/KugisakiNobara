@@ -15,7 +15,7 @@ from SaitamaRobot import BOT_ID
 from SaitamaRobot.Chatbot.chatbotdb import add_chat, get_session, remove_chat
 from SaitamaRobot import arq
 from SaitamaRobot.utils.pluginhelp import admins_only, edit_or_reply
-from SaitamaRobot import pbot as eren
+from SaitamaRobot import pbot as Nobara
 
 translator = google_translator()
 
