@@ -39,7 +39,10 @@ if ENV:
 
     JOIN_LOGGER = os.environ.get('JOIN_LOGGER', None)
     OWNER_USERNAME = os.environ.get("OWNER_USERNAME", None)
-
+   
+    try:
+        BOT_ID = int(os.environ.get("BOT_ID", None))
+    
     try:
         DRAGONS = set(int(x) for x in os.environ.get("DRAGONS", "").split())
         DEV_USERS = set(int(x) for x in os.environ.get("DEV_USERS", "").split())
