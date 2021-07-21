@@ -1,0 +1,22 @@
+FUMO_GIFS = [
+      "CgACAgIAAxkBAAEHeZ5g94-AeivsuMVHvSMxGf_3JiTGOAACuAsAAmPkQEroiOASMungmiAE",
+      "CgACAgIAAxkBAAEHekBg95KA9lC24w8n6sAYrjQ9WlEX6gACpA4AAk49yEn7EOwECV0O7CAE",
+      "CgACAgQAAxkBAAEHekpg95KULYRxr4ThTp3PBAiBBTgv5wACoAIAAjihLVNu03_gnh4vKiAE",
+      "CgACAgQAAxkBAAEHemBg95LCrY4vLEAxAAEX2G50o5zIfs4AAl0CAAJyaMVSjt1xjr6KFk8gBA",
+      "CgACAgQAAxkBAAEHemRg95LqLu_wqGEN9H619OSEoNDQCQACgQIAArF6pVF5-jEb0LDFziAE",
+      "CgACAgQAAxkBAAEHemhg95MBU4zYQI9kikrL3fbeZyCTsQACfwIAAuHVJFEOLVY6X0knGSAE",
+      "CgACAgQAAxkBAAEHemtg95MZaKHGN_xMAAGf2CVg0GLlfmUAAn0CAAI4R8VSx1-3sfZ_JjggBA",
+      "CgACAgQAAxkBAAEHem5g95MuCvY-_G7IHAzcwWKUzh2pCQACmQIAAjYTfVIiYYS2_jpyCiAE",
+      "CgACAgQAAxkBAAEHenFg95NG3VCeSApvDTbfDkpehywrxgACGwIAAqC7pVMo9CupI2mnxSAE",
+      "CgACAgQAAxkBAAEHenVg95OUgvwzaSHX3rC6pvXaU-ohOwACqAIAAl70XVKrQdW40mnueiAE"
+   ]
+
+
+
+FUMO_TEXTS = [
+     "Fumo Grabs You!",
+     "{user1} is a Fumofied!",
+     "{user1} mofu mofu",
+     ""
+     "{user1} Mofu! pats  {user2}"
+   ]
