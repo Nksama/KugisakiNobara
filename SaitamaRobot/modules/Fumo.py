@@ -26,9 +26,9 @@ def fumo(update: Update, context: CallbackContext):
     user_id = extract_user(message, args)
 
     if user_id:
-        neko_user = bot.get_chat(user_id)
+        fumo_user = bot.get_chat(user_id)
         user1 = curr_user
-        user2 = html.escape(neko_user.first_name)
+        user2 = html.escape(fumo_user.first_name)
 
     else:
         user1 = bot.first_name
