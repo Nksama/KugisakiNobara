@@ -74,13 +74,13 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-Yahho Hello I am Nobara, Be happy, boys. I'm the woman in your group[.](https://telegra.ph/file/33569f78a0f9c565db3a3.jpg)
+Yahho Watashi Rikka Desu, I am Groups Management Bot !! I can Help You Manage Your Group for you!!, send /help for command list...[.](https://telegra.ph/file/47b37adec215e8737d9d7.jpg)
 """
 
 buttons = [
     [
         InlineKeyboardButton(
-            text="➕️ sᴜᴍᴍᴏɴ ➕️", url="t.me/NobarasanRobot?startgroup=true"),
+            text="➕️ sᴜᴍᴍᴏɴ ➕️", url="t.me/RikasanRobot?startgroup=true"),
     ],
     [
         InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="Nobara_"),
@@ -95,7 +95,7 @@ buttons = [
 
 
 HELP_STRINGS = """
-Hai, Nobara [Kugisaki](https://telegra.ph/file/2e925ae6d720be7ab39f4.jpg) 
+Hai, Rika Chan Desu[.](https://telegra.ph/file/338303f6131d638d3c65c.mp4) 
 """
 
 yone_IMG = "https://telegra.ph/file/2aea4cfb32a76c857217c.jpg"
@@ -387,7 +387,7 @@ def Source_about_callback(update, context):
     query = update.callback_query
     if query.data == "source_":
         query.message.edit_text(
-            text=""" Hi."👋" I'm *Nobara Kugisaki*
+            text=""" Hi."👋" I'm *Rika Takanashi*
                  \nHere is the [Source Code](https://github.com/Noob-kittu/YoneRobot) .""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
