@@ -48,8 +48,8 @@ def fumo(update: Update, context: CallbackContext):
         reply_to.reply_sticker(reply, parse_mode=ParseMode.HTML)
  
 
-        except BadRequest:
-            fumo_type = "Text"
+       except BadRequest:            
+           fumo_type = "Text"
 
     if fumo_type == "Text":
         temp = random.choice(fumostrings.FUMO_TEXT)
