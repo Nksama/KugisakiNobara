@@ -31,4 +31,5 @@ FUMO_STICKERS = [
        "{user2} Got Fumofied",
        "{user1} Reincarnated As a Fumo",
        "{user2} Mofu Mofu!"
-   ]
+    ]
+      
