@@ -74,13 +74,13 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-Yahho Watashi Rikka Desu, I am Groups Management Bot !! I can Help You Manage Your Group for you!!, send /help for command list...[.](https://telegra.ph/file/47b37adec215e8737d9d7.jpg)
+Yahho Watashi Kugisaki Nobara, I am Groups Management Bot !! I can Help You Manage Your Group for you!!, send /help for command list...[.](https://telegra.ph/file/1f054a1f6e857f6c4428d.jpg)
 """
 
 buttons = [
     [
         InlineKeyboardButton(
-            text="➕️ sᴜᴍᴍᴏɴ ➕️", url="t.me/RikasanRobot?startgroup=true"),
+            text="➕️ sᴜᴍᴍᴏɴ ➕️", url="t.me/NobarasanRobot?startgroup=true"),
     ],
     [
         InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="Nobara_"),
@@ -95,10 +95,10 @@ buttons = [
 
 
 HELP_STRINGS = """
-Hai, Rika Chan Desu[.](https://telegra.ph/file/338303f6131d638d3c65c.mp4) 
+Hai, Jujutsu Sorcerer Nobara desu[.](https://telegra.ph/file/658c0bfcd61c32c6bbeb5.mp4) 
 """
 
-yone_IMG = "https://telegra.ph/file/2aea4cfb32a76c857217c.jpg"
+yone_IMG = "https://telegra.ph/file/8cb7697ccae94c9ce5b4d.jpg"
 
 DONATE_STRING = """Soon."""
 
