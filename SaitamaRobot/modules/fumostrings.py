@@ -22,3 +22,9 @@ FUMO_STICKERS = [
      "CAACAgEAAxkBAAEHlWhg-PRFu7j-2HQngZG2II_7aCZx2gACKgADUypEPAeT3YifKneTIAQ",
      "CAACAgEAAxkBAAEHlY1g-Pb8JBtp8fJTEUvXEKrG5XHxDgACXAADUypEPBRSMOhTJ24BIAQ"
    ]
+ FUMO_TEXTS = [
+       "{user1} Gifts {user2} A Fummo Doll",
+       "{user1} Headpats {user2}"
+       "{user2} Got Fumofied"
+       "{user1} Reincarnated As a Fumo"
+       "{user2} Mofu Mofu!"
