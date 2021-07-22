@@ -42,14 +42,14 @@ def fumo(update: Update, context: CallbackContext):
         except BadRequest:
             pat_type = "Text"
 
-    if pat_type == "Sticker":
+    if fumo_type == "Sticker":
         try:
             temp = random.choice(fun_strings.FUMO_STICKERS)
             reply_to.reply_sticker(temp)
         except BadRequest:
-            pat_type = "Text"
+            fumo_type = "Text"
 
-    if pat_type == "Text":
+    if fumo_type == "Text":
         temp = random.choice(fumostrings.FUMO_TEXTS)
         reply = temp.format(user1=user1, user2=user2)
         reply_to.reply_text(reply, parse_mode=ParseMode.HTML)
