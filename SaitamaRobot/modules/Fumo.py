@@ -46,8 +46,17 @@ def fumo(update: Update, context: CallbackContext):
         temp = random.choice(fumostrings.FUMO_STICKERS)
         reply = temp.format(user1=user1, user2=user2)
         reply_to.reply_sticker(reply, parse_mode=ParseMode.HTML)
+ 
 
-help = """
+        except BadRequest:
+            fumo_type = "Text"
+
+    if fumo_type == "Text":
+        temp = random.choice(fumostrings.FUMO_TEXT)
+        reply = temp.format(user1=user1, user2=user2)
+        reply_to.reply_text(reply, parse_mode=ParseMode.HTML)
+            
+            help = """
  • /fumo*:* Use this to get Fumo Gifs!
 """
 
