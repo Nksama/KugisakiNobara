@@ -54,9 +54,6 @@ def fumo(update: Update, context: CallbackContext):
         reply = temp.format(user1=user1, user2=user2)
         reply_to.reply_text(reply, parse_mode=ParseMode.HTML)
             
-  __help__ = """
- • `/fumo`*:* Use this to get cute Fumo Gifs!
-
 
 FUMO_HANDLER = DisableAbleCommandHandler("fumo", fumo)
 
