@@ -13,10 +13,12 @@ FUMO_GIFS = [
 
 
 
-FUMO_TEXTS = [
-     "Fumo Grabs You!",
-     "{user1} is a Fumofied!",
-     "{user1} mofu mofu",
-     ""
-     "{user1} Mofu! pats  {user2}"
+FUMO_STICKERS = [
+     " CAACAgEAAxkBAAEHlWFg-PQuQXUuXvV_sCZ0efoDGzOpigACAgADUypEPFDutdgRH1B6IAQ",
+     "CAACAgEAAxkBAAEHlWJg-PQzYkeBPo25HwP_XXQuTFKuMQACAwADUypEPCIiz7NiEMoaIAQ",
+     " CAACAgEAAxkBAAEHlWNg-PQ1vTAVkeq2Df2t1ijf3VbP5AACDwADUypEPEe90ovvXiupIAQ",
+     "CAACAgEAAxkBAAEHlWZg-PRAmpj4XjfQoq36CLe-m97fpQACKQADUypEPKzzVqBWxknmIAQ",
+     " CAACAgEAAxkBAAEHlYhg-Paa_UMU1UqYd6Ht-D0gJIg7ZwACNAADUypEPMcOxBRUjAH6IAQ",
+     "CAACAgEAAxkBAAEHlWhg-PRFu7j-2HQngZG2II_7aCZx2gACKgADUypEPAeT3YifKneTIAQ",
+     "CAACAgEAAxkBAAEHlY1g-Pb8JBtp8fJTEUvXEKrG5XHxDgACXAADUypEPBRSMOhTJ24BIAQ"
    ]
