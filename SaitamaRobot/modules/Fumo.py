@@ -34,11 +34,18 @@ def fumo(update: Update, context: CallbackContext):
         user1 = bot.first_name
         user2 = curr_user
 
-    fumo_type = random.choice(("Text", "Gif"))
+    fumo_type = random.choice(("Sickers", "Gif"))
     if fumo_type == "Gif":
         try:
             temp = random.choice(fumostrings.FUMO_GIFS)
             reply_to.reply_animation(temp)
+        except BadRequest:
+            fumo_type = "Stickers"
+
+    if fumo_type == "Stickers":
+        temp = random.choice(fumostrings.FUMO_STICKERS)
+        reply = temp.format(user1=user1, user2=user2)
+        reply_to.reply_sticker(reply, parse_mode=ParseMode.HTML)
 
 help = """
  • /fumo*:* Use this to get Fumo Gifs!
