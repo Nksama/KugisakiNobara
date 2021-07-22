@@ -44,7 +44,7 @@ def fumo(update: Update, context: CallbackContext):
 
     if fumo_type == "Sticker":
         try:
-            temp = random.choice(fun_strings.FUMO_STICKERS)
+            temp = random.choice(fumostrings.FUMO_STICKERS)
             reply_to.reply_sticker(temp)
         except BadRequest:
             fumo_type = "Text"
