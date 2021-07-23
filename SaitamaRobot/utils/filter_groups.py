@@ -5,4 +5,9 @@ karma_negative_group = 4
 regex_group = 5
 welcome_captcha_group = 6
 antiflood_group = 7
-© 2021 GitHub, Inc.
+
+
+
+
+
+#© 2021 GitHub, Inc.
