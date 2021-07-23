@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 
 def watchorderx(_,message):
 
-	anime = message.text.replace('/watchorder' , '')	anime = anime.replace(' ' , '')
+	anime =  message.text.replace(message.text.split(' ')[0], '')
 
 	res = requests.get(f'https://chiaki.site/?/tools/autocomplete_series&term={anime}').json()
 
