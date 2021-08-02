@@ -4,11 +4,11 @@ from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
 
 from SaitamaRobot import telethn 
-from SaitamaRobot.events import register as SaitamaRobot
+from SaitamaRobot.events import register as nobara
 
 
 
-@SaitamaRobot(pattern="^/tagall ?(.*)")
+@nobara(pattern="^/tagall ?(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -20,7 +20,7 @@ async def _(event):
     await event.delete()
 
 
-@SaitamaRobot(pattern="^/users ?(.*)")
+@nobara(pattern="^/users ?(.*)")
 async def _(event):
     if event.fwd_from:
         return
