@@ -4,7 +4,7 @@ from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
 
 from SaitamaRobot import telethn 
-from SaitamaRobot.events import register as nobara
+from SaitamaRobot.event import register as nobara
 
 
 
