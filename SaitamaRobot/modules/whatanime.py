@@ -10,11 +10,9 @@ import tempfile
 from urllib.parse import quote as urlencode
 from decimal import Decimal
 from datetime import timedelta
-
 from pyrogram import Client, filters
 from pyrogram.types import Message
-
-from SaitamaRobot import pbot
+from SaitamaRobot import pgram as pbot
 
 session = aiohttp.ClientSession()
 progress_callback_data = {}
@@ -49,7 +47,7 @@ def calculate_eta(current, total, start_time):
     return ', '.join(thing)
 
 
-@pbot.on_message(filters.command('wa'))
+@pbot.on_message(filters.command('whatanime'))
 async def whatanime(c: Client, m: Message):
     media = m.photo or m.animation or m.video or m.document
     if not media:
@@ -57,7 +55,7 @@ async def whatanime(c: Client, m: Message):
         if not getattr(reply, 'empty', True):
             media = reply.photo or reply.animation or reply.video or reply.document
     if not media:
-        await m.reply_text('Photo or GIF or Video required')
+        await m.reply_text('Please reply it to a Photo or Gif or Video to work')
         return
     with tempfile.TemporaryDirectory() as tempdir:
         reply = await m.reply_text('Downloading...')
@@ -67,13 +65,13 @@ async def whatanime(c: Client, m: Message):
         await proc.communicate()
         await reply.edit_text('Uploading...')
         with open(new_path, 'rb') as file:
-            async with session.post('https://trace.moe/api/search', data={'image': file}) as resp:
+            async with session.post('https://api.trace.moe/search', data={'image': file}) as resp:
                 json = await resp.json()
     if isinstance(json, str):
         await reply.edit_text(html.escape(json))
     else:
         try:
-            match = next(iter(json['docs']))
+            match = next(iter(json["docs"]))
         except StopIteration:
             await reply.edit_text('No match')
         else:
@@ -139,7 +137,6 @@ async def progress_callback(current, total, reply):
             download_speed = '0 B'
         text = f'''Downloading...
 <code>{return_progress_string(current, total)}</code>
-
 <b>Total Size:</b> {format_bytes(total)}
 <b>Downladed Size:</b> {format_bytes(current)}
 <b>Download Speed:</b> {download_speed}/s
