@@ -1,6 +1,7 @@
-from SaitamaRobot import pbot
+from SaitamaRobot import pbot as bot
 from pyrogram import filters
-import redis #redis is requirements
+import redis # add redis is requirements
+import requests
 
 r = redis.Redis(
     host=os.environ.get("REDIS_URL"), # get it from redislabs.com and remove the last 4 numbers in the url after ":"
@@ -8,6 +9,8 @@ r = redis.Redis(
     password=os.environ["REDIS_PASSWORD"],
     decode_responses=True
 )
+
+bot_id = 1789026011
 
 @bot.on_message(filters.command('addchat'))
 def addchat(_,message):
@@ -18,8 +21,20 @@ def addchat(_,message):
 def addchat(_,message):
 	r.set(message.chat.id , False)
 
-@bot.on_message(filters.text)
+
+@bot.on_message(
+    filters.text
+    & filters.reply,
+)
 def chatbot(_,message):
+    if not message.reply_to_message:
+        return
+    try:
+        moepro = message.reply_to_message.from_user.id
+    except:
+        return
+    if moepro != bot_id:
+        return
 	text = message.text
 	kek = r.get(message.chat.id)
     if kek and "/" not in text:
