@@ -1,42 +1,20 @@
-from tswift import Song
-
-from telegram import Bot, Update, Message, Chat
-from telegram.ext import run_async
-from telegram.ext import Updater, CommandHandler, CallbackContext
-from SaitamaRobot import dispatcher
-from SaitamaRobot.modules.disable import DisableAbleCommandHandler
+from Python_ARQ import ARQ
+from aiohttp import ClientSession
+import os
+from SaitamaRobot import pbot
+from pyrogram import filters
 
 
-@run_async
-def lyrics(update: Update, context: CallbackContext):
-    bot = context.bot
-    msg = update.effective_message
-    query = msg.text[len("/lyrics ") :]
-    song = ""
-    if not query:
-        msg.reply_text("You haven't specified which song to look for!")
-        return
-    else:
-        song = Song.find_song(query)
-        if song:
-            if song.lyrics:
-                reply = song.format()
-            else:
-                reply = "Couldn't find any lyrics for that song!"
-        else:
-            reply = "Song not found!"
-        if len(reply) > 4090:
-            with open("lyrics.txt", "w") as f:
-                f.write(f"{reply}\n\n\nOwO UwU OmO")
-            with open("lyrics.txt", "rb") as f:
-                msg.reply_document(
-                    document=f,
-                    caption="Message length exceeded max limit! Sending as a text file.",
-                )
-        else:
-            msg.reply_text(reply)
+arq_url = "https://thearq.tech"
+arq_api = os.environ["arq_api"]
 
 
-LYRICS_HANDLER = DisableAbleCommandHandler("lyrics", lyrics, pass_args=True)
-
-dispatcher.add_handler(LYRICS_HANDLER)
+@pbot.on_message(filters.command('lyrics'))
+async def lyrics(_,message):
+    msg = message.text.replace(message.text.split(' ')[0], '')
+    session = ClientSession()
+    arq = ARQ(arq_api , arq_url , session)
+    lyrics_ = arq.lyrics(msg)
+    kek = lyrics_[0]
+    await message.reply_text(kek)
+    await session.close()
