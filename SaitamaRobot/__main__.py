@@ -88,7 +88,7 @@ buttons = [
             text="ɢʀᴏᴜᴘ", url=f"https://t.me/The_Phantom_Troupe"),
              
         InlineKeyboardButton(
-            text="ɢʀᴏᴜᴘ", url=f"https://t.me/shinobinet"
+            text="Network", url=f"https://t.me/shinobinet"
         ),
     ],
     [
