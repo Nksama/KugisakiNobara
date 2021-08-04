@@ -53,3 +53,5 @@ html2text
 bing_image_downloader
 register
 dispatcher
+search_engine_parser 
+html2text
