@@ -1,20 +1,23 @@
+
 from Python_ARQ import ARQ
 from aiohttp import ClientSession
 import os
+
+from pyrogram.types.messages_and_media import message
 from SaitamaRobot import pbot
 from pyrogram import filters
 
 
-arq_url = "https://thearq.tech"
-arq_api = os.environ["arq_api"]
+api_url = "https://thearq.tech/"
+api_key = os.environ["arq_api"]
 
 
 @pbot.on_message(filters.command('lyrics'))
-async def lyrics(_,message):
-    msg = message.text.replace(message.text.split(' ')[0], '')
+async def main():
     session = ClientSession()
-    arq = ARQ(arq_api , arq_url , session)
-    lyrics_ = arq.lyrics(msg)
-    kek = lyrics_[0]
-    await message.reply_text(kek)
+    message = message.text.replace(message.text.split(' ')[0], '')
+    arq = ARQ(api_url, api_key, session)
+    results = await arq.lyrics(message)
+    lyrics = results.result
+    await message.reply_text(lyrics)
     await session.close()
