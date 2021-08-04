@@ -82,6 +82,11 @@ buttons = [
         InlineKeyboardButton(
             text="➕️ sᴜᴍᴍᴏɴ ➕️", url="t.me/NobarasanRobot?startgroup=true"),
     ],
+    [   InlineKeyboardButton(
+            text=" Network " , url=f"https://t.me/shinobinet"
+    ),
+        
+    
     [
         InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="Nobara_"),
         InlineKeyboardButton(
