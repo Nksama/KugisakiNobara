@@ -78,12 +78,12 @@ def mute(update: Update, context: CallbackContext) -> str:
         bot.restrict_chat_member(chat.id, user_id, chat_permissions)
         bot.sendMessage(
             chat.id,
-            f"<b>{html.escape(member.user.first_name)}</b> dimute ga tau sampe kapan.",
+            f"<b>{html.escape(member.user.first_name)}</b> Muted For Eternity Until He/She Gets Unmute.",
             parse_mode=ParseMode.HTML)
         return log
 
     else:
-        message.reply_text("Udah di mute -_-")
+        message.reply_text("Already muted -_-")
 
     return ""
 
@@ -102,7 +102,7 @@ def unmute(update: Update, context: CallbackContext) -> str:
     user_id = extract_user(message, args)
     if not user_id:
         message.reply_text(
-            "Kasih username atau id buat mute user, reply chat nya juga bisa."
+            "Give the username or id to mute the user, you can also reply to the chat."
         )
         return ""
 
