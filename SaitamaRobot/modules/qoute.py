@@ -6,12 +6,20 @@ from pyrogram.types import Message
 
 from SaitamaRobot import arq
 from SaitamaRobot.utils.errors import capture_err
-from SaitamaRobot import pgram as app, BOT_USERNAME
+from SaitamaRobot import pbot as app
+import os
+from aiohttp import ClientSession
 
 
-
+BOT_USERNAME = "nobarasanrobot"
 
 async def quotify(messages: list):
+    session = ClienSession()
+    arq = (
+    api_url="https://thearq.tech/",
+    api_key=os.environ.get("ARQ_API"),
+    session
+    )
     response = await arq.quotly(messages)
     if not response.ok:
         return [False, response.result]
@@ -19,6 +27,7 @@ async def quotify(messages: list):
     sticker = BytesIO(sticker)
     sticker.name = "sticker.webp"
     return [True, sticker]
+    await session.close()
 
 
 def getArg(message: Message) -> str:
