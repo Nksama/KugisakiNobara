@@ -10,16 +10,13 @@ from SaitamaRobot import pbot as app
 import os
 from aiohttp import ClientSession
 
-
+api_key=os.environ.get("ARQ_API")
 BOT_USERNAME = "nobarasanrobot"
+api_url="https://thearq.tech/"
 
 async def quotify(messages: list):
     session = ClienSession()
-    arq = (
-    api_url="https://thearq.tech/",
-    api_key=os.environ.get("ARQ_API"),
-    session
-    )
+    arq = (api_url ,api_key , session)
     response = await arq.quotly(messages)
     if not response.ok:
         return [False, response.result]
