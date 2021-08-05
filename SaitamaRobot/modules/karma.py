@@ -1,4 +1,4 @@
-from SaitamaRobot import pgram
+from SaitamaRobot import pbot
 from SaitamaRobot.modules.helper_funcs.dbfunctions import (update_karma, get_karma, get_karmas,
                                    int_to_alpha, alpha_to_int)
 from SaitamaRobot.modules.helper_funcs.filter_groups import karma_positive_group, karma_negative_group
