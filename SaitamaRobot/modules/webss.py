@@ -1,7 +1,10 @@
 from pyrogram import filters
 
-from SaitamaRobot import pgram as app, BOT_USERNAME
+from SaitamaRobot import pbot as app
+
 from SaitamaRobot.utils.errors import capture_err
+
+BOT_USERNAME="NobarasanRobot"
 
 @app.on_message(filters.command("webss", f"webss@{BOT_USERNAME}"))
 @capture_err
