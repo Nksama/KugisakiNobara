@@ -8,6 +8,7 @@ import textwrap
 from html import escape
 from bs4 import BeautifulSoup as bs
 
+from telegram.ext import CallbackContext
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram import TelegramError, Update
 from telegram.utils.helpers import mention_html
