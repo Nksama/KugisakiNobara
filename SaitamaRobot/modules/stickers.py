@@ -10,7 +10,6 @@ from bs4 import BeautifulSoup as bs
 
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram import TelegramError, Update
-from telegram.ext import run_async, CallbackContext
 from telegram.utils.helpers import mention_html
 
 from SaitamaRobot import dispatcher
