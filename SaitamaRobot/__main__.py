@@ -98,7 +98,7 @@ buttons = [
 
 
 HELP_STRINGS = """
-[Nobara](https://telegra.ph/file/658c0bfcd61c32c6bbeb5.mp4)
+Nobara(https://telegra.ph/file/658c0bfcd61c32c6bbeb5.mp4)
 """
 
 yone_IMG = "https://telegra.ph/file/8cb7697ccae94c9ce5b4d.jpg"
