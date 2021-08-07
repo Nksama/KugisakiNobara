@@ -15,7 +15,7 @@ from telegram.utils.helpers import mention_html
 
 from SaitamaRobot import dispatcher
 from SaitamaRobot.modules.disable import DisableAbleCommandHandler
-from SaitamaRobot.events import register as Cutiepii
+from SaitamaRobot.events import register as Nobara
 from SaitamaRobot import telethn as bot
 
 combot_stickers_url = "https://combot.org/telegram/stickers?q="
@@ -479,7 +479,7 @@ def delsticker(update, context):
 Credit = "This Plugin Made by Kittu (@A_viyu), if you're using this code in your bot. there is no issue but don't remove this line" 
 
 
-@Cutiepii(pattern="^/mmf ?(.*)")
+@Nobara(pattern="^/mmf ?(.*)")
 async def handler(event):
     if event.fwd_from:
         return
