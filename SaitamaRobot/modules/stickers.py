@@ -520,7 +520,7 @@ async def drawText(image_path, text):
     if os.name == "nt":
         fnt = "ariel.ttf"
     else:
-        fnt = "./Cutiepii_Robot/resources/ArmWrestler.ttf"
+        fnt = "./SaitamaRobot/resources/ArmWrestler.ttf"
     m_font = ImageFont.truetype(fnt, int((70 / 640) * i_width))
     if ";" in text:
         upper_text, lower_text = text.split(";")
