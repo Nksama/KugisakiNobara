@@ -610,11 +610,11 @@ __help__ = """
 """
 
 __mod_name__ = "Stickers"
-STICKERID_HANDLER = DisableAbleCommandHandler("stickerid", stickerid, run_async=True)
-GETSTICKER_HANDLER = DisableAbleCommandHandler("getsticker", getsticker, run_async=True)
-KANG_HANDLER = DisableAbleCommandHandler(["kang", "steal"], kang, admin_ok=True, run_async=True)
-DELKANG_HANDLER = DisableAbleCommandHandler(["delsticker", "delkang"], delsticker, admin_ok=True, run_async=True)
-STICKERS_HANDLER = DisableAbleCommandHandler("stickers", cb_sticker, run_async=True)
+STICKERID_HANDLER = DisableAbleCommandHandler("stickerid", stickerid)
+GETSTICKER_HANDLER = DisableAbleCommandHandler("getsticker", getsticker)
+KANG_HANDLER = DisableAbleCommandHandler(["kang", "steal"], kang, admin_ok=True)
+STICKERS_HANDLER = DisableAbleCommandHandler("stickers", cb_sticker)
+DELKANG_HANDLER = DisableAbleCommandHandler(["delsticker", "delkang"], delsticker, admin_ok=True)
 
 dispatcher.add_handler(STICKERS_HANDLER)
 dispatcher.add_handler(STICKERID_HANDLER)
