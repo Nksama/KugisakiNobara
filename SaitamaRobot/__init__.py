@@ -3,7 +3,7 @@ import os
 import sys
 import time
 import spamwatch
-
+import run async
 from pyrogram import Client, errors
 
 import telegram.ext as tg
