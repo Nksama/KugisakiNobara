@@ -23,7 +23,7 @@ def git(_,message):
 **Followers**: {res['followers']}
 **Following**: {res['following']}
 """
-    message.reply_photo("test.jpg" , caption=data , parse_mode='markdown')
+    pbot.send_photo(message.chat.id , "test.jpg" , caption=data , parse_mode="markdown")
     os.remove("test.jpg")
 
 
