@@ -8,9 +8,10 @@ import os
 def git(_,message):
     user = message.text.replace(message.text.split(' ')[0], '')
     res = requests.get(f"https://api.github.com/users/{user}").json()
+    img_res = requests.get(res['avatar_url'])
 
     with open("test.jpg" , "wb") as f:
-        f.write(res.content)
+        f.write(img_res.content)
 
 
     data = f"""
